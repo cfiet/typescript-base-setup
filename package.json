@@ -1,0 +1,67 @@
+{
+  "name": "typescript-base-setup",
+  "version": "0.0.1",
+  "description": "Basic setup for TypeScript code",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cfiet/typescript-base-setup"
+  },
+  "scripts": {
+    "build": "npm run build:types && npm run build:js",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
+    "verify:lint": "lint-staged",
+    "verify:check-size": "npm run build && node scripts/checkSize.js",
+    "verify:test": "npm run test",
+    "verify": "npm run verify:lint && npm run verify:test && npm run verify:check-size",
+    "precommit": "npm run verify"
+  },
+  "author": "Maciej Makowski <maciejm.js13k (at) cfiet.net>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-typescript": "^7.9.0",
+    "@babel/types": "^7.9.6",
+    "@types/jest": "^25.2.3",
+    "babel-plugin-minify-dead-code-elimination": "^0.5.1",
+    "babel-plugin-minify-mangle-names": "^0.5.0",
+    "babel-preset-minify": "^0.5.1",
+    "fast-check": "^1.24.2",
+    "jest-cli": "^26.0.1",
+    "lint-staged": "^10.2.6",
+    "prettier": "^2.0.5",
+    "source-map-loader": "^0.2.4",
+    "ts-jest": "^26.0.0",
+    "tslint": "^6.1.2",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.9.3"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "json"
+    ],
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.ts$",
+    "transform": {
+      "^.+\\.(js)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testPathIgnorePatterns": [
+      "\\.snap$",
+      "<rootDir>/node_modules/"
+    ],
+    "cacheDirectory": ".jest/cache"
+  },
+  "lint-staged": {
+    "**/*.ts": "tslint"
+  }
+}

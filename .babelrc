@@ -1,0 +1,22 @@
+{
+    "ignore": [
+        "**/*.test.ts",
+        "**/*.test.js",
+        "lib/**/*.*"
+    ],
+    "presets": [
+        "@babel/env",
+        "@babel/typescript",
+        [
+            "minify",
+            {
+                "mangle": true,
+                "deadcode": true
+            }
+        ]
+    ],
+    "plugins": [
+        "@babel/proposal-class-properties",
+        "@babel/proposal-object-rest-spread"
+    ]
+}
