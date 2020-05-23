@@ -11,14 +11,14 @@
     "build": "npm run build:types && npm run build:js",
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
-    "test": "jest",
+    "test": "npm run verify",
     "test:watch": "jest --watch",
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
-    "verify:lint": "lint-staged",
+    "lint": "eslint . --ext .ts --ext .js",
     "verify:check-size": "npm run build && node scripts/checkSize.js",
-    "verify:test": "npm run test",
-    "verify": "npm run verify:lint && npm run verify:test && npm run verify:check-size",
+    "verify:test": "jest",
+    "verify": "npm run lint && npm run verify:test && npm run verify:check-size",
     "precommit": "npm run verify"
   },
   "author": "Maciej Makowski <maciejm.js13k (at) cfiet.net>",
@@ -31,17 +31,19 @@
     "@babel/preset-typescript": "^7.9.0",
     "@babel/types": "^7.9.6",
     "@types/jest": "^25.2.3",
+    "@typescript-eslint/eslint-plugin": "^3.0.0",
+    "@typescript-eslint/parser": "^3.0.0",
     "babel-plugin-minify-dead-code-elimination": "^0.5.1",
     "babel-plugin-minify-mangle-names": "^0.5.0",
     "babel-preset-minify": "^0.5.1",
+    "eslint": "^7.1.0",
     "fast-check": "^1.24.2",
+    "jest": "^26.0.1",
     "jest-cli": "^26.0.1",
     "lint-staged": "^10.2.6",
     "prettier": "^2.0.5",
     "source-map-loader": "^0.2.4",
     "ts-jest": "^26.0.0",
-    "tslint": "^6.1.2",
-    "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.9.3"
   },
   "jest": {
@@ -62,6 +64,6 @@
     "cacheDirectory": ".jest/cache"
   },
   "lint-staged": {
-    "**/*.ts": "tslint"
+    "**/*.ts": "eslint"
   }
 }

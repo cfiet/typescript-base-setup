@@ -17,8 +17,8 @@ export default class Vector2 {
         private _y: number = 0
     ) { }
 
-    get x() { return this._x; }
-    get y() { return this._y; }
+    get x(): number { return this._x; }
+    get y(): number { return this._y; }
 
     copy(): Vector2 {
         return new Vector2(this._x, this._y);
